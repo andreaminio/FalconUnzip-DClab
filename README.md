@@ -51,48 +51,113 @@ cd ..
 
 ### 1.2 Run TANmasker
 
-1. `bash scripts/run_jobs.01.TANmask.01.OVL`
+1. TANmask
+```bash
+bash scripts/run_jobs.01.TANmask.01.OVL
+```
    * **Parallelizable:** task_mem="10G", task_cores="8"
-2. `bash scripts/run_jobs.01.TANmask.02.SORT`
+
+2. SORT
+```bash
+bash scripts/run_jobs.01.TANmask.02.SORT
+```
    * **Parallelizable:** task_mem="10G", task_cores="1"
-1. *[Optional Checkpoint]* `bash scripts/run_jobs.01.TANmask.03.CHECK.OPT`
-4. `bash scripts/run_jobs.01.TANmask.04.RM`
-5. `bash scripts/run_jobs.01.TANmask.05.MASK`
+
+3. [Optional Checkpoint]
+```bash
+bash scripts/run_jobs.01.TANmask.03.CHECK.OPT
+```
+
+4. RM
+```bash
+bash scripts/run_jobs.01.TANmask.04.RM
+```
+
+5. MASK 
+```bash
+bash scripts/run_jobs.01.TANmask.05.MASK
+```
    * **Parallelizable:** task_mem="10G", task_cores="8"
-6. `Catrack -v raw_reads.db tan`
-7. `bash scripts/run_jobs.01.TANmask.06.RM`
+
+5. track info
+```bash
+Catrack -v raw_reads.db tan
+```
+
+6. RM
+```bash
+bash scripts/run_jobs.01.TANmask.06.RM
+```
 
 
 
 ### 1.3 REPmask
-1. `bash scripts/run_jobs.02.REPmask.01.OVL`
+1. OVL
+```bash
+bash scripts/run_jobs.02.REPmask.01.OVL
+```
    * **Parallelizable:** task_mem="35G", task_cores="8"
-1. `bash scripts/run_jobs.02.REPmask.02.SORT`
+
+2. MASK
+```bash
+bash scripts/run_jobs.02.REPmask.02.SORT
+```
    * **Parallelizable:** task_mem="10G", task_cores="1"
-1. *[Optional Checkpoint]* `bash scripts/bash scripts/run_jobs.02.REPmask.03.CHECK.OPT
-1. `bash scripts/run_jobs.02.REPmask.04.RM`
-1. `bash scripts/run_jobs.02.REPmask.05.MERGE`
+
+3. *[Optional Checkpoint]* 
+```bash
+bash scripts/bash scripts/run_jobs.02.REPmask.03.CHECK.OPT
+```
+
+4. RM 
+```bash
+bash scripts/run_jobs.02.REPmask.04.RM
+```
+
+5. `bash scripts/run_jobs.02.REPmask.05.MERGE`
    * **Parallelizable:** task_mem="15G", task_cores="1"
-1. *[Optional Checkpoint]* `bash scripts/run_jobs.02.REPmask.06.CHECK.OPT`
-1. `bash scripts/run_jobs.02.REPmask.07.RM`
-1. `bash scripts/run_jobs.02.REPmask.08.MASK`
+
+5. *[Optional Checkpoint]* 
+```bash
+bash scripts/run_jobs.02.REPmask.06.CHECK.OPT
+```
+`
+6. RM
+```bash
+bash scripts/run_jobs.02.REPmask.07.RM
+```
+
+
+7. MASK
+```bash
+bash scripts/run_jobs.02.REPmask.08.MASK
+```
    * **Parallelizable:** task_mem="15G", task_cores="8"
-1. `Catrack -v raw_reads.db rep2
-1. `bash scripts/run_jobs.02.REPmask.09.RM`
+
+9. Track info
+```bash
+Catrack -v raw_reads.db rep2
+```
+
+10. RM
+```bash
+bash scripts/run_jobs.02.REPmask.09.RM
+```
+
 
 
 
 ### 1.4 - Daligner
 1. `bash scripts/run_jobs.03.Daligner.00.MKDIR`
-1. `bash scripts/run_jobs.03.Daligner.01.OVL`
+2. `bash scripts/run_jobs.03.Daligner.01.OVL`
    * **Parallelizable:** task_mem="35G", task_cores="8"
-1. `bash scripts/run_jobs.03.Daligner.02.SORT`
+3. `bash scripts/run_jobs.03.Daligner.02.SORT`
    * **Parallelizable:** task_mem="10G", task_cores="1"
-1. *[Optional Checkpoint]* `bash scripts/run_jobs.03.Daligner.03.CHECK.OPT`
-1. `bash scripts/run_jobs.03.Daligner.04.RM`
-1. ***[OPTIONAL]*** Split merging processes if the 250< # Chunks ($LB) <= 500
+4. *[Optional Checkpoint]* `bash scripts/run_jobs.03.Daligner.03.CHECK.OPT`
+5. `bash scripts/run_jobs.03.Daligner.04.RM`
+6. ***[OPTIONAL]*** Split merging processes if the 250< # Chunks ($LB) <= 500
    * `sed -i 's:\(.*raw_reads\.\)\([0-9]*\) \(.*\)250 \(.*\):\1\2\.1 \3250; \1\2\.2 \4; \1\2 raw_reads\.\2\.1 raw_reads\.\2\.2:;s: L[0-9]*.[0-9]*.;:;:' scripts/run_jobs.03.Daligner.05.MERGE `
-1. `bash scripts/run_jobs.03.Daligner.05.MERGE`
+7. `bash scripts/run_jobs.03.Daligner.05.MERGE`
    * **Parallelizable:** task_mem="15G", task_cores="1"
 1. *[Optional Checkpoint]* `bash scripts/run_jobs.03.Daligner.06.CHECK.OPT`
 1. `bash scripts/run_jobs.03.Daligner.07.RM.OPT`
